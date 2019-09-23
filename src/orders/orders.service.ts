@@ -5,15 +5,23 @@ import { Model } from 'mongoose';
 
 @Injectable()
 export class OrdersService {
-    constructor(@InjectModel('Order') private readonly orderModel: Model<IOrder>) {}
+  constructor(@InjectModel('Order') private readonly orderModel: Model<IOrder>) { }
 
-    async findAll(){
-        return await this.orderModel.find();
-      }
+  async findAll() {
+    return await this.orderModel.find();
+  }
 
-    async create(createCatDto: any): Promise<IOrder> {
-        Logger.log(createCatDto)
-        const createdCat = new this.orderModel(createCatDto);
-        return await createdCat.save();
-      }
+  async create(createCatDto: any): Promise<IOrder> {
+    Logger.log(createCatDto)
+    const createdCat = new this.orderModel(createCatDto);
+    return await createdCat.save();
+  }
+
+  async removeOrder(orderId: any) {
+    return await this.orderModel.deleteOne({"orderId": orderId})
+  }
+  async delete(){
+   
+    return await this.orderModel.remove({});
+  }
 }

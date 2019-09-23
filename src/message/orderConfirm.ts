@@ -1,29 +1,63 @@
+import { ConfigService } from 'nestjs-config';
 export function orderConfirm(orderAll) {
 
     let items = [1, 2, 3]
-    let orders = orderAll.map((value) => {
+    let orders = [{
+        "type": "box",
+        "layout": "baseline",
+        "contents": [
+            {
+                "type": "text",
+                "text": `รหัส`,
+                "size": "sm"
+            },
+            {
+                "type": "text",
+                "text": `เมนู`,
+                "weight": "bold",
+                "margin": "sm",
+                "flex": 0,
+                "align": "end",
+            },
+            {
+                "type": "text",
+                "text": " ",
+                "size": "sm",
+                "align": "end",
+                "color": "#dc3545",
+            }
+        ],
+    },]
+    orderAll.map((value) => {
         // console.log(value)
         let message = {
             "type": "box",
             "layout": "baseline",
             "contents": [
                 {
-                    "type": "icon",
-                    "url": "https://scdn.line-apps.com/n/channel_devcenter/img/fx/restaurant_regular_32.png"
+                    "type": "text",
+                    "text": `${value.orderId}.`,
+                    "size": "sm"
                 },
                 {
                     "type": "text",
                     "text": `${value.name} - ${value.menu}`,
                     "weight": "bold",
                     "margin": "sm",
-                    "flex": 0
+                    "flex": 0,
+                    "align": "end",
                 },
                 {
                     "type": "text",
-                    "text": "400kcl",
+                    "text": "ลบ",
                     "size": "sm",
                     "align": "end",
-                    "color": "#aaaaaa"
+                    "color": "#dc3545",
+                    "action": {
+                        "type": "message",
+                        "label": "action",
+                        "text": `ลบรายการที่ ${value.orderId}`
+                    },
                 }
             ],
             "action": {
@@ -33,33 +67,25 @@ export function orderConfirm(orderAll) {
             }
         }
 
-        return message
+        return orders.push(message)
     })
 
-    // console.log(orders[0])
+    console.log(orders)
 
 
     let msg = {
         "type": "bubble",
         "hero": {
             "type": "image",
-            "url": "https://1c635567.ngrok.io/food/confirmOrder",
+            "url": `${ConfigService.get('config.localhost')}/food/confirmOrder`,
             "size": "full",
             "aspectRatio": "20:13",
             "aspectMode": "cover",
-            "action": {
-                "type": "uri",
-                "uri": "https://linecorp.com"
-            }
         },
         "body": {
             "type": "box",
             "layout": "vertical",
             "spacing": "md",
-            "action": {
-                "type": "uri",
-                "uri": "https://linecorp.com"
-            },
             "contents": [
                 {
                     "type": "text",
@@ -90,9 +116,9 @@ export function orderConfirm(orderAll) {
                     "style": "primary",
                     "color": "#905c44",
                     "action": {
-                        "type": "uri",
-                        "label": "Add to Cart",
-                        "uri": "https://linecorp.com"
+                        "type": "postback",
+                        "label": "ยืนยันรายการ",
+                        "data": "ยืนยันรายการ"
                     }
                 }
             ]
