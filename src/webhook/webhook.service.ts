@@ -35,6 +35,7 @@ export class WebhookService {
         let typeMessage = body.events[0].type
         let replyToken = null
         let text = null
+        Logger.log(uid)
         switch (typeMessage) {
 
             case 'postback':

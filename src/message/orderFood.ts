@@ -59,8 +59,8 @@ export function order() {
                         "style": "primary",
                         "action": {
                             "type": "postback",
-                            "label": `${value.name}+ใข่ดาว`,
-                            "data": `สั่ง ${value.name}ใข่ดาว`
+                            "label": `${value.option1}`,
+                            "data": `สั่ง ${value.option1}`
                         }
                     },
                     {
@@ -68,8 +68,8 @@ export function order() {
                         "style": "primary",
                         "action": {
                             "type": "postback",
-                            "label": `${value.name}+ใข่เจียว`,
-                            "data": `สั่ง ${value.name}ใข่เจียว`
+                            "label": `${value.option2}`,
+                            "data": `สั่ง ${value.option2}`
                         }
                     },
                 ]
