@@ -1,0 +1,41 @@
+<html>
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>My LIFF App</title>
+    <script src="vconsole.min.js"></script>
+    <script>
+        // init vConsole
+        var vConsole = new VConsole();
+        console.log('Hello world');
+    </script>
+</head>
+
+<body>
+    <p id="scanCode"></p>
+    <p>
+        <button id="btnScanCode" onclick="scanCode();">Scan Code</button>
+    </p>
+    <script src="https://static.line-scdn.net/liff/edge/2.1/liff.js"></script>
+    <script>
+        async function scanCode() {
+            // const aaa = await liff.getProfile();
+            // console.log(aaa);
+            liff.scanCode().then(result => {
+                const stringifiedResult = JSON.stringify(result);
+                alert(stringifiedResult);
+                document.getElementById("scanCode").textContent = stringifiedResult;
+            }).catch(err => {
+                console.log(err)
+            });
+        }
+        liff.init({ liffId: "1621126095-r7eZ292b" }, () => { }, err => console.error(err.code, error.message));
+        if (liff.isLoggedIn() === false) {
+            liff.login();
+        }
+
+    </script>
+</body>
+
+</html>
