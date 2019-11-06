@@ -119,8 +119,8 @@ export class WebhookService {
         })
     }
 
-    replyConfirmOrder(replyToken: any) {
-        this.orderService.findAll().then(res => {
+   async replyConfirmOrder(replyToken: any) {
+       await this.orderService.findAll().then(res => {
             let body = JSON.stringify({
                 replyToken: replyToken,
                 messages: [{

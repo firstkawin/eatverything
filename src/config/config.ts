@@ -1,3 +1,3 @@
 export default {
-    localhost: process.env.LOCALHOST || 'https://8f8d7842.ngrok.io',
+    localhost: process.env.LOCALHOST || 'https://first.1mobyline.com',
 }
